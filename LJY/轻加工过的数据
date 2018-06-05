@@ -56,37 +56,37 @@ plt.show()
 #年的第几周
 summary_wyear_avg_duration = pd.DataFrame(train_data.groupby(['week_of_year'])['trip_duration'].mean())
 summary_wyear_avg_duration.reset_index(inplace = True)
-summary_wyear_avg_duration_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
+summary_wyear_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
 plt.show()
 
 #年的第几天
 summary_dyear_avg_duration = pd.DataFrame(train_data.groupby(['day_of_year'])['trip_duration'].mean())
 summary_dyear_avg_duration.reset_index(inplace = True)
-summary_dyear_avg_duration_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
+summary_dyear_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
 plt.show()
 
 #周几
 summary_dweek_avg_duration = pd.DataFrame(train_data.groupby(['day_of_week'])['trip_duration'].mean())
 summary_dweek_avg_duration.reset_index(inplace = True)
-summary_dweek_avg_duration_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
+summary_dweek_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
 plt.show()
 
 #hvsine距离
 summary_hp2d_avg_duration = pd.DataFrame(train_data.groupby(['hvsine_pick_drop'])['trip_duration'].mean())
 summary_hp2d_avg_duration.reset_index(inplace = True)
-summary_hp2d_avg_duration_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
+summary_hp2d_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
 plt.show()
 
 #manhtn距离
 summary_mp2d_avg_duration = pd.DataFrame(train_data.groupby(['manhtn_pick_drop'])['trip_duration'].mean())
 summary_mp2d_avg_duration.reset_index(inplace = True)
-summary_mp2d_avg_duration_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
+summary_mp2d_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
 plt.show()
 
 #bearing
 summary_bearing_avg_duration = pd.DataFrame(train_data.groupby(['bearing'])['trip_duration'].mean())
 summary_bearing_avg_duration.reset_index(inplace = True)
-summary_bearing_avg_duration_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
+summary_bearing_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
 plt.show()
 
 
