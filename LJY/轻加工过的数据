@@ -99,4 +99,5 @@ summary_hp2d_avg_duration.to_csv("summary_hp2d_avg_duration.csv",index = False,s
 summary_mp2d_avg_duration.to_csv("summary_mp2d_avg_duration.csv",index = False,sep = ',')
 summary_bearing_avg_duration.to_csv("summary_bearing_avg_duration.csv",index = False,sep = ',')
 
-
+#将这八个特征输出到result文件内
+train_data.to_csv('result.csv')
