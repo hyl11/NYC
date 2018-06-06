@@ -1,0 +1,77 @@
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import testdf as lgb
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import roc_auc_score
+import json
+
+def lgb_rmsle_score(preds, dtrain):
+    labels = np.exp(dtrain.get_label())
+    preds = np.exp(preds.clip(min=0))
+    return 'rmsle', np.sqrt(np.mean(np.square(np.log1p(preds)-np.log1p(labels)))), False
+
+data = pd.read_csv('/home/apple/NYC-Taxi/first/result.csv')
+
+#选取变量的对应列，可扩充
+feature_cols = ['vendor_id','passenger_count','pickup_longitude',
+                'pickup_latitude','dropoff_longitude','dropoff_latitude',
+                'trip_duration','total_distance','total_travel_time',
+                'number_of_steps','pick_month','hour','week_of_year','day_of_year',
+                'day_of_week','hvsine_pick_drop','manhtn_pick_drop','bearing',
+                'pickup_pca0','pickup_pca1','dropoff_pca0','dropoff_pca1',
+                'havsine_pick_drop','speed_hvsn','speed_manhtn','label_pick','label_drop',
+                'centroid_pick_long','centroid_pick_lat','centroid_drop_long',
+                'centroid_drop_lat','hvsine_pick_cent_p','hvsine_drop_cent_d',
+                'hvsine_cent_p_cent_d','manhtn_pick_cent_p','manhtn_drop_cent_d',
+                'manhtn_cent_p_cent_d','bearing_pick_cent_p','bearing_drop_cent_p',
+                'bearing_cent_p_cent_d']
+#print(data.shape)
+
+#得到特征对应的矩阵，命名为X，
+X = data[feature_cols]
+
+X = pd.DataFrame(X,dtype=np.float)
+#print(X.shape)
+
+#目标值对应的矩阵，对应于Y，
+Y = data['trip_duration']
+#print(Y.shape)
+
+X_train,X_test,y_trian,y_test = train_test_split(X.values,Y,test_size  = 0.5,random_state = 1987)
+
+d_train = lgb.Dataset(X_train, y_train)
+d_eval = lgb.Dataset(X_test, y_test, reference=d_train)
+
+lgb_params = {
+    'learning_rate': 1.0, # try 0.2
+    'max_depth': 8,
+    'num_leaves': 55,
+    'objective': 'regression',
+    #'metric': {'rmse'},
+    'feature_fraction': 0.9,
+    'bagging_fraction': 0.5,
+    #'bagging_freq': 5,
+    'max_bin': 200}       # 1000
+
+
+cv_result_lgb = lgb.cv(lgb_params,
+                       d_train,
+                       num_boost_round=5000,
+                       nfold=3,
+                       feval=lgb_rmsle_score,
+                       early_stopping_rounds=50,
+                       verbose_eval=100,
+                       show_stdv=True)
+
+n_rounds = len(cv_result_lgb['rmsle-mean'])
+
+
+model_lgb = lgb.train(lgb_params,
+                      d_train,
+                      feval=lgb_rmsle_score,
+                      num_boost_round=n_rounds)
+
+y_test_pred = model_lgb.predict(X_test)
+print(y_test_pred)
+print('The roc of prediction is:', roc_auc_score(y_test, y_tets_pred) )
+
