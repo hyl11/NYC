@@ -23,7 +23,11 @@ def get_feature():
     # 加入天气相关信息，
     dataframe = wat.get_weather_info(dataframe)
     print(dataframe.head())
-
+    
+    # 加入节日信息
+    dataframe = wat.get_holiday(dataframe)
+    print(dataframe.head())
+    
     # 加入变换后的坐标的信息，适用pca来变换坐标
     dataframe = gpca.get_pca(dataframe)
     print(dataframe.head())
