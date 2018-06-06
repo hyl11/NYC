@@ -89,6 +89,14 @@ summary_bearing_avg_duration.reset_index(inplace = True)
 summary_bearing_avg_duration['trip_duration'].plot(kind = 'line',rot = 0)
 plt.show()
 
-
+#打印表格
+summary_pmonth_avg_duration.to_csv("summary_pmonth_avg_duration.csv",index = False,sep = ',')
+summary_hour_avg_duration.to_csv("summary_hour_avg_duration.csv",index = False,sep = ',')
+summary_wyear_avg_duration.to_csv("summary_wyear_avg_duration.csv",index = False,sep = ',')
+summary_dyear_avg_duration.to_csv("summary_dyear_avg_duration.csv",index = False,sep = ',')
+summary_dweek_avg_duration.to_csv("summary_dweek_avg_duration.csv",index = False,sep = ',')
+summary_hp2d_avg_duration.to_csv("summary_hp2d_avg_duration.csv",index = False,sep = ',')
+summary_mp2d_avg_duration.to_csv("summary_mp2d_avg_duration.csv",index = False,sep = ',')
+summary_bearing_avg_duration.to_csv("summary_bearing_avg_duration.csv",index = False,sep = ',')
 
 
