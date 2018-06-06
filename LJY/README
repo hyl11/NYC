@@ -2,9 +2,9 @@
 图表显示数据分布及其与旅行时间的大致相关曲线
 get_result123将处理过的数据加入result.csv
 
-                'vendor_id','pickup_datetime', 'dropoff_datetime','passenger_count','pickup_longitude',
+feature_cols = ['vendor_id','passenger_count','pickup_longitude',
                 'pickup_latitude','dropoff_longitude','dropoff_latitude',
-                'store_and_fwd_flag','trip_duration','total_distance','total_travel_time',
+                'trip_duration','total_distance','total_travel_time',
                 'number_of_steps','pick_month','hour','week_of_year','day_of_year',
                 'day_of_week','hvsine_pick_drop','manhtn_pick_drop','bearing',
                 'pickup_pca0','pickup_pca1','dropoff_pca0','dropoff_pca1',
@@ -13,4 +13,5 @@ get_result123将处理过的数据加入result.csv
                 'centroid_drop_lat','hvsine_pick_cent_p','hvsine_drop_cent_d',
                 'hvsine_cent_p_cent_d','manhtn_pick_cent_p','manhtn_drop_cent_d',
                 'manhtn_cent_p_cent_d','bearing_pick_cent_p','bearing_drop_cent_p',
-                'bearing_cent_p_cent_d'
+                'bearing_cent_p_cent_d']
+
