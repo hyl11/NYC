@@ -15,3 +15,6 @@ feature_cols = ['vendor_id','passenger_count','pickup_longitude',
                 'manhtn_cent_p_cent_d','bearing_pick_cent_p','bearing_drop_cent_p',
                 'bearing_cent_p_cent_d']
 
+model0 是从头开始的lgb
+model1 魔改 利用result和test_result 会有内存不足的问题
+modelXGB xgb 结果很好
