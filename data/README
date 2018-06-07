@@ -1,0 +1,5 @@
+数据部分，包括：
+     train.csv是起始数据，
+     weather.csv:天气数据
+     fastest_routes：最快路径数据
+     holiday.csv:节假日信息。
