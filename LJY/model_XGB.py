@@ -7,8 +7,8 @@ from sklearn.cluster import KMeans
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
-#from sklearn.cluster import MiniBatchKmeans
-data = pd.read_csv('/home/apple/NYC-Taxi/first/result.csv')
+
+data = pd.read_csv('../data/result.csv')
 feature_names = ['vendor_id','passenger_count','pickup_longitude',
                 'pickup_latitude','dropoff_longitude','dropoff_latitude',
                 'trip_duration','total_distance','total_travel_time',
