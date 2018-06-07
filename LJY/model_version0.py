@@ -8,8 +8,8 @@ import lightgbm as lgb
 import gc
 
 
-train = pd.read_csv('/home/apple/Downloads/train.csv')
-test = pd.read_csv('/home/apple/Downloads/test.csv')
+train = pd.read_csv('../data/train.csv')
+test = pd.read_csv('../data/test.csv')
 #print(train.shape, test.shape)
 
 #remove outliers  (about an hour and half max to go to JFK )将过大的数据删掉并输出最大时间和平均时间
