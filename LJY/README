@@ -8,6 +8,8 @@ get_result1 get_result2 get_result3将处理过的数据加入result.csv
 
 model 三个回归模型，xgb来自kernel，作为参考。
       version0用了25个feature，version1用了以下40个feature，比version0的效果要好。
+     
+picture文件夹中是输出的图表及回归模型分数评估
 
 feature_cols = ['vendor_id','passenger_count','pickup_longitude',
                 'pickup_latitude','dropoff_longitude','dropoff_latitude',
