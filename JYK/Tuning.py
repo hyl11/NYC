@@ -56,7 +56,8 @@ X = Imputer().fit_transform(X)
 """
 #n_estimators
 gsearch1 = GridSearchCV(estimator = GradientBoostingRegressor(learning_rate = 0.1, min_samples_split = 300, min_samples_leaf = 20, max_depth = 8, max_features = 'sqrt', subsample = 0.8, random_state = 10),
-                        param_grid = {'n_estimators': [20,30,40,50,60,70,80]}, scoring = 'neg_mean_squared_error', iid = False, cv = 5)
+                        param_grid = {'n_estimators': [20,30,40,50,60,70,80]}, 
+                        scoring = 'neg_mean_squared_error', iid = False, cv = 5)
 gsearch1.fit(X, y)
 print(gsearch1.grid_scores_, gsearch1.best_params_, gsearch1.best_score_)
 """
