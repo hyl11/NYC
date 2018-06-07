@@ -4,7 +4,7 @@ import get_pca_var as gpca
 import hav_var as hv
 
 def get_feature():
-    dataframe = pd.read_csv('result.csv')
+    dataframe = pd.read_csv('../data/result.csv')
     print("this is the csv read in \n")
     print(dataframe.head())
     print(dataframe.shape)
