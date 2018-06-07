@@ -8,5 +8,5 @@
   csv文件即处理后的数据，共计8
 
 modelXGB    是xgb的结果
-train&test  是model0的结果
-train&test2 是model1的结果
+train&eval  是model0的结果
+train&eval2 是model1的结果
