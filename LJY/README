@@ -1,6 +1,6 @@
 数据的简单处理
-图表显示数据分布及其与旅行时间的大致相关曲线
-get_result123将处理过的数据加入result.csv
+1-7程序执行后 图表显示数据分布及其与旅行时间的大致相关曲线
+get_result1 get_result2 get_result3将处理过的数据加入result.csv
 
 feature_cols = ['vendor_id','passenger_count','pickup_longitude',
                 'pickup_latitude','dropoff_longitude','dropoff_latitude',
@@ -15,6 +15,6 @@ feature_cols = ['vendor_id','passenger_count','pickup_longitude',
                 'manhtn_cent_p_cent_d','bearing_pick_cent_p','bearing_drop_cent_p',
                 'bearing_cent_p_cent_d']
 
-model0 是从头开始的lgb
-model1 魔改 利用result和test_result 删掉偏僻的trip_duration内存就够了
+model0 是从头开始的lgb 建议运行
+model1 参数存在改进空间
 modelXGB xgb 结果很好
