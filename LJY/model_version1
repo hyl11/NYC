@@ -1,4 +1,4 @@
-#内存不足
+
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import lightgbm as lgb
@@ -11,11 +11,11 @@ def lgb_rmsle_score(preds, dtrain):
     preds = np.exp(preds.clip(min=0))
     return 'rmsle', np.sqrt(np.mean(np.square(np.log1p(preds)-np.log1p(labels)))), False
 
-data = pd.read_csv('/home/apple/NYC-Taxi/first/result.csv')
-test = pd.read_csv('/home/apple/NYC-Taxi/first/test_result.csv')
+data = pd.read_csv('result.csv')
+test = pd.read_csv('test_result.csv')
 
-data = pd.read_csv('/home/apple/NYC-Taxi/first/result.csv')
-test = pd.read_csv('/home/apple/NYC-Taxi/first/test_result.csv')
+data = pd.read_csv('result.csv')
+test = pd.read_csv('test_result.csv')
 
 #选取变量的对应列，可扩充
 feature_testcols = ['vendor_id','passenger_count','pickup_longitude','pickup_latitude',
