@@ -59,7 +59,7 @@ def manhattan_distance_pd(lat1, lng1, lat2, lng2):
     return a + b
 
 def ex_features():
-    train_df = pd.read_csv('result.csv')
+    train_data = pd.read_csv('../data/result.csv')
     train_data = train_df.copy()
     #剔除duration异常过大的点
     train_data = train_data.loc[(train_data.trip_duration < 500000) & (train_data.trip_duration > 0)]
