@@ -12,7 +12,7 @@ import hav_var as hv
 #  'hvsine_drop_cent_p
 
 def get_feature():
-    dataframe = pd.read_csv('train.csv')
+    dataframe = pd.read_csv('../data/train.csv')
     print("this is the csv read in \n")
     print(dataframe.head())
     print(dataframe.shape)
@@ -38,10 +38,10 @@ def get_feature():
     dataframe = hv.ex_speed_hvsn(dataframe)
     dataframe = hv.ex_speed_manhtn(dataframe)
     print(dataframe.shape)
-    dataframe.to_csv('result.csv')
+  #  dataframe.to_csv('result.csv')
     return dataframe
 data = get_feature()
-data.to_csv('result.csv')
+data.to_csv('../data/result.csv')
 
 
 
