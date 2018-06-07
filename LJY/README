@@ -1,5 +1,6 @@
 数据的简单处理
 1-7程序执行后 图表显示数据分布及其与旅行时间的大致相关曲线
+feature1 提取时间及距离
 get_result1 get_result2 get_result3将处理过的数据加入result.csv
 
 feature_cols = ['vendor_id','passenger_count','pickup_longitude',
@@ -14,7 +15,5 @@ feature_cols = ['vendor_id','passenger_count','pickup_longitude',
                 'hvsine_cent_p_cent_d','manhtn_pick_cent_p','manhtn_drop_cent_d',
                 'manhtn_cent_p_cent_d','bearing_pick_cent_p','bearing_drop_cent_p',
                 'bearing_cent_p_cent_d']
-
-model0 是从头开始的lgb 建议运行
-model1 参数存在改进空间
-modelXGB xgb 结果很好
+                
+model三个文件运行后都可以得到结果，xgb最好，model version1最差
