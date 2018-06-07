@@ -6,7 +6,7 @@ import gc
 
 data = pd.read_csv('/home/apple/NYC-Taxi/first/result.csv')
 
-# NYC longitude and latitude borders 处理经纬度 删掉过于偏僻的地点
+# NYC longitude and latitude borders 处理时间和经纬度 删掉过于偏僻的地点
 data = data[data['trip_duration'] <  data['trip_duration'].quantile(0.999)]
 data = data[data['trip_duration'] <= data['trip_duration'].mean() + 3*data['trip_duration'].std()]
 ep = 0.0001
