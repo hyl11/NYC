@@ -53,14 +53,14 @@ X = Imputer().fit_transform(X)
 
 #由于预测中会出现零星负值，所以不方便使用neg_mean_squared_log_error来做scoring进行调参，我们使用neg_mean_squared_error作为scoring方式
 
-"""
+
 #n_estimators
 gsearch1 = GridSearchCV(estimator = GradientBoostingRegressor(learning_rate = 0.1, min_samples_split = 300, min_samples_leaf = 20, max_depth = 8, max_features = 'sqrt', subsample = 0.8, random_state = 10),
                         param_grid = {'n_estimators': [20,30,40,50,60,70,80]}, 
                         scoring = 'neg_mean_squared_error', iid = False, cv = 5)
 gsearch1.fit(X, y)
 print(gsearch1.grid_scores_, gsearch1.best_params_, gsearch1.best_score_)
-"""
+
 """
 [mean: -8815162.65277, std: 1194558.85623, params: {'n_estimators': 20}, 
  mean: -8816442.05210, std: 1190649.11365, params: {'n_estimators': 30}, 
@@ -71,14 +71,14 @@ print(gsearch1.grid_scores_, gsearch1.best_params_, gsearch1.best_score_)
  mean: -8828996.94165, std: 1186707.16514, params: {'n_estimators': 80}] 
  {'n_estimators': 20} -8815162.652774245
 """
-"""
+
 #对决策树进行调参。首先我们对决策树最大深度max_depth和内部节点再划分所需最小样本数min_samples_split进行网格搜索。
 param_test2 = {'max_depth':range(3,14,2), 'min_samples_split':range(100,801,200)}
 gsearch2 = GridSearchCV(estimator = GradientBoostingRegressor(learning_rate=0.1, n_estimators=20, min_samples_leaf=20, max_features='sqrt', subsample=0.8, random_state=10), 
                         param_grid = {'max_depth':[3,5,7,9,11,13], 'min_samples_split':[100,200,300,400,500,600,700,800]}, scoring='neg_mean_squared_error',iid=False, cv=5)
 gsearch2.fit(X,y)
 print(gsearch2.grid_scores_, gsearch2.best_params_, gsearch2.best_score_)
-"""
+
 """
 [mean: -8819770.47204, std: 1195555.80350, params: {'max_depth': 3, 'min_samples_split': 100}, 
  mean: -8819569.60139, std: 1195757.47337, params: {'max_depth': 3, 'min_samples_split': 200}, 
@@ -130,7 +130,7 @@ print(gsearch2.grid_scores_, gsearch2.best_params_, gsearch2.best_score_)
  mean: -8819486.11882, std: 1192995.67334, params: {'max_depth': 13, 'min_samples_split': 800}] 
 {'max_depth': 7, 'min_samples_split': 300} -8806178.788289417
 """
-"""
+
 #由于决策树深度7是一个比较合理的值，我们把它定下来，对于内部节点再划分所需最小样本数min_samples_split，我们暂时不能一起定下来，因为这个还和决策树其他的参数存在关联。
 #下面我们再对内部节点再划分所需最小样本数min_samples_split和叶子节点最少样本数min_samples_leaf一起调参。
 param_test3 = {'min_samples_split':range(800,1900,200), 'min_samples_leaf':range(60,101,10)}
@@ -138,7 +138,7 @@ gsearch3 = GridSearchCV(estimator = GradientBoostingRegressor(learning_rate=0.1,
                        param_grid = {'min_samples_split':[800,1000,1200,1400,1600,1800], 'min_samples_leaf':[60,70,80,90,100]}, scoring='neg_mean_squared_error',iid=False, cv=5)
 gsearch3.fit(X,y)
 print(gsearch3.grid_scores_, gsearch3.best_params_, gsearch3.best_score_)
-"""
+
 """
 [mean: -8802762.91033, std: 1197760.90779, params: {'min_samples_leaf': 60, 'min_samples_split': 800}, 
  mean: -8797070.93923, std: 1199105.46653, params: {'min_samples_leaf': 60, 'min_samples_split': 1000}, 
