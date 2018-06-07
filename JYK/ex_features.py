@@ -15,6 +15,8 @@ centroid_drop_long
 centroid_drop_lat
 hvsine_pick_cent_p
 hvsine_drop_cent_d
+hvsine_pick_cent_d',
+hvsine_drop_cent_p
 hvsine_cent_p_cent_d
 manhtn_pick_cent_p
 manhtn_drop_cent_d
@@ -83,7 +85,7 @@ def manhattan_distance_pd(lat1, lng1, lat2, lng2):
     return a + b
 
 def ex_features():
-    train_df = pd.read_csv('train.csv')
+    train_df = pd.read_csv('../data/result.csv')
     train_data = train_df.copy()
     #剔除duration异常过大的点
     train_data = train_data.loc[(train_data.trip_duration < 500000) & (train_data.trip_duration > 0)]
@@ -96,18 +98,36 @@ def ex_features():
     centroid_dropoff['label_drop'] = centroid_dropoff.index
     train_cl = pd.merge(train_cl, centroid_pickups, how = 'left', on = ['label_pick'])
     train_cl = pd.merge(train_cl, centroid_dropoff, how = 'left', on = ['label_drop'])
-    train_cl.loc[:,'bearing'] = bearing_array(train_data['pickup_latitude'].values, train_data['pickup_longitude'].values, train_data['dropoff_latitude'].values, train_data['dropoff_longitude'].values)
-    train_cl.loc[:,'hvsine_pick_cent_p'] = haversine_(train_cl['pickup_latitude'].values, train_cl['pickup_longitude'].values, train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values)
-    train_cl.loc[:,'hvsine_drop_cent_d'] = haversine_(train_cl['dropoff_latitude'].values, train_cl['dropoff_longitude'].values, train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
-    train_cl.loc[:,'hvsine_cent_p_cent_d'] = haversine_(train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values, train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
-    train_cl.loc[:,'manhtn_pick_cent_p'] = manhattan_distance_pd(train_cl['pickup_latitude'].values, train_cl['pickup_longitude'].values, train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values)
-    train_cl.loc[:,'manhtn_drop_cent_d'] = manhattan_distance_pd(train_cl['dropoff_latitude'].values, train_cl['dropoff_longitude'].values, train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
-    train_cl.loc[:,'manhtn_cent_p_cent_d'] = manhattan_distance_pd(train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values, train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
-    train_cl.loc[:,'bearing_pick_cent_p'] = bearing_array(train_cl['pickup_latitude'].values, train_cl['pickup_longitude'].values, train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values)
-    train_cl.loc[:,'bearing_drop_cent_p'] = bearing_array(train_cl['dropoff_latitude'].values, train_cl['dropoff_longitude'].values, train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
-    train_cl.loc[:,'bearing_cent_p_cent_d'] = bearing_array(train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values, train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
+    train_cl.loc[:,'bearing'] = bearing_array(train_data['pickup_latitude'].values, train_data['pickup_longitude'].values,
+                                              train_data['dropoff_latitude'].values, train_data['dropoff_longitude'].values)
+    train_cl.loc[:,'hvsine_pick_cent_p'] = haversine_(train_cl['pickup_latitude'].values, train_cl['pickup_longitude'].values,
+                                                      train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values)
+    train_cl.loc[:,'hvsine_drop_cent_d'] = haversine_(train_cl['dropoff_latitude'].values, train_cl['dropoff_longitude'].values,
+                                                      train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
+    train_cl.loc[:,'hvsine_cent_p_cent_d'] = haversine_(train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values,
+                                                        train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
+    train_cl.loc[:, 'hvsine_pick_cent_d'] = haversine_(train_cl['pickup_latitude'].values,train_cl['pickup_longitude'].values,
+                                                       train_cl['centroid_drop_lat'].values,train_cl['centroid_drop_long'].values)
+    train_cl.loc[:,'hvsine_drop_cent_p'] = haversine_(train_cl['dropoff_latitude'].values,train_cl['dropoff_longitude'].values,
+                                                      train_cl['centroid_pick_lat'].values,train_cl['centroid_pick_long'].values)
+
+    train_cl.loc[:,'manhtn_pick_cent_p'] = manhattan_distance_pd(train_cl['pickup_latitude'].values, train_cl['pickup_longitude'].values,
+                                                                 train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values)
+    train_cl.loc[:,'manhtn_drop_cent_d'] = manhattan_distance_pd(train_cl['dropoff_latitude'].values, train_cl['dropoff_longitude'].values,
+                                                                 train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
+    train_cl.loc[:,'manhtn_cent_p_cent_d'] = manhattan_distance_pd(train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values,
+                                                                   train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
+
+    train_cl.loc[:,'bearing_pick_cent_p'] = bearing_array(train_cl['pickup_latitude'].values, train_cl['pickup_longitude'].values,
+                                                          train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values)
+    train_cl.loc[:,'bearing_drop_cent_p'] = bearing_array(train_cl['dropoff_latitude'].values, train_cl['dropoff_longitude'].values,
+                                                          train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
+    train_cl.loc[:,'bearing_cent_p_cent_d'] = bearing_array(train_cl['centroid_pick_lat'].values, train_cl['centroid_pick_long'].values,
+                                                            train_cl['centroid_drop_lat'].values, train_cl['centroid_drop_long'].values)
+
     #print(train_cl)
     return train_cl
 
 train_cl = ex_features()
-train_cl.to_csv('result.csv')
+print(train_cl.head())
+train_cl.to_csv('../data/result.csv')
