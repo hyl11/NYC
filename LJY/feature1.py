@@ -32,7 +32,7 @@ def bearing_array(lat1, lng1, lat2, lng2):
     x = np.cos(lat1) * np.sin(lat2) - np.sin(lat1) * np.cos(lat2) * np.cos(lng_delta_rad)
     return np.degrees(np.arctan2(y, x))
 
-
+train_data = pd.read_csv('../data/train.csv')
 train_data['pickup_datetime'] = pd.to_datetime(train_data.pickup_datetime)
 train_data.loc[:, 'pick_month'] = train_data['pickup_datetime'].dt.month
 train_data.loc[:, 'hour'] = train_data['pickup_datetime'].dt.hour
