@@ -40,8 +40,11 @@ X_test = Imputer().fit_transform(X_test)
 
 print("training")
 start = time.time()
-#调参见Tuning.py，最后还有一定的手动调参过程。主要的调整参数为n_estimators,max_depth,min_samples_leaf,min_samples_split,subsample
-clf = ensemble.GradientBoostingRegressor(learning_rate=0.1, n_estimators=80, max_depth=7, min_samples_leaf=80, min_samples_split=1000, max_features='sqrt', subsample = 0.8,  random_state=10)
+#调参见Tuning.py，最后还有一定的手动调参过程。
+#主要的调整参数为n_estimators,max_depth,min_samples_leaf,min_samples_split,subsample
+clf = ensemble.GradientBoostingRegressor(learning_rate=0.1, n_estimators=80, max_depth=7, 
+                                         min_samples_leaf=80, min_samples_split=1000, 
+                                         max_features='sqrt', subsample = 0.8,  random_state=10)
 #放入训练集，建立模型
 gbdt_model = clf.fit(X_train, y_train)
 
